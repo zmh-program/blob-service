@@ -20,7 +20,7 @@ Then the service will be running on `http://localhost:8000`
 
 ## Deploy
 ```shell
-uvicorn main:app --host
+uvicorn main:app
 ```
 
 ## API
