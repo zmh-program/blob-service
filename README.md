@@ -42,4 +42,5 @@ Response
 ```
 
 Environment Variables
-```shell
+- `AZURE_SPEECH_KEY`: Azure Speech to Text Service Key
+- `AZURE_SPEECH_REGION`: Azure Speech to Text Service Region
