@@ -1,3 +1,4 @@
+import os
 import time
 from fastapi import UploadFile
 from config import EXPOSE
@@ -19,7 +20,9 @@ def is_image(filename: str) -> bool:
 
 def save_image(file: UploadFile) -> str:
     """Saves image to path."""
-    name, suffix = file.filename.split(".")
+    segment = file.filename.split(".")
+    name, suffix = ".".join(segment[:-1]), segment[-1]
+
     path = f"static/{name}_{int(time.time())}.{suffix}"
 
     with open(path, "wb") as buffer:
