@@ -1,9 +1,11 @@
-fastapi~=0.104
-uvicorn[standard]~=0.23
+fastapi
+uvicorn[standard]
+python-multipart
 
-pypdf~=3.17
-python-docx~=1.0
-python-pptx~=0.6
-openpyxl~=3.1
+pypdf
+python-docx
+python-pptx
+openpyxl
 
-azure-cognitiveservices-speech~=1.32
+azure-cognitiveservices-speech
+cryptography

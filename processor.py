@@ -1,4 +1,6 @@
 from fastapi import UploadFile, File
+
+from config import ENABLE_AZURE_SPEECH
 from handlers import (
     pdf,
     word,
@@ -22,7 +24,7 @@ async def process_file(file: UploadFile = File(...)) -> str:
         return xlsx.process(file)
     elif image.is_image(filename):
         return image.process(file)
-    elif speech.is_audio(filename):
+    elif ENABLE_AZURE_SPEECH and speech.is_audio(filename):
         return speech.process(file)
 
     content = await file.read()
