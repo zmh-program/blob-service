@@ -1,7 +1,5 @@
-import os
-import time
 from fastapi import UploadFile
-from config import EXPOSE
+import base64
 
 COMMON_IMAGE_EXTENSIONS = {
     "png", "jpg", "jpeg", "gif", "bmp", "svg", "webp",
@@ -18,20 +16,9 @@ def is_image(filename: str) -> bool:
     return filename.split(".")[-1] in COMMON_IMAGE_EXTENSIONS
 
 
-def save_image(file: UploadFile) -> str:
-    """Saves image to path."""
-    segment = file.filename.split(".")
-    name, suffix = ".".join(segment[:-1]), segment[-1]
-
-    path = f"static/{name}_{int(time.time())}.{suffix}"
-
-    with open(path, "wb") as buffer:
-        buffer.write(file.file.read())
-
-    return path
-
-
 def process(file: UploadFile) -> str:
-    """Process image and return its url."""
-    path = save_image(file)
-    return f"{EXPOSE}/{path}"
+    """Process image and return its base64 url."""
+
+    contents = file.file.read()
+    encoded = base64.b64encode(contents).decode("utf-8")
+    return f"data:image/{file.content_type};base64,{encoded}"

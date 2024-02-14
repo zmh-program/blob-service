@@ -10,6 +10,9 @@ def is_docx(filename: str) -> bool:
 
 def process(file: UploadFile) -> str:
     """Process docx file and return its contents."""
+    if file.filename.endswith(".doc"):
+        raise ValueError(".doc files are not supported, only .docx files are supported.")
+
     content = file.file.read()
     doc = Document(BytesIO(content))
     return "\n".join([p.text for p in doc.paragraphs])

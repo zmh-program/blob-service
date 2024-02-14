@@ -6,6 +6,7 @@ pypdf
 python-docx
 python-pptx
 openpyxl
+xlrd
 
 azure-cognitiveservices-speech
 cryptography

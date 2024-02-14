@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Nio Blob Service</title>
+    <link href="https://open.lightxi.com/fonts/Open-Sans" rel="stylesheet">
+    <style>
+    html, body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background: hsl(var(--background));
+    }
+
+    * {
+        box-sizing: border-box;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-overflow-scrolling: touch;
+        font-family: "Open Sans",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    }
+
+    :root {
+        --background: 0 0% 0%;
+        --background-hover: 0 0% 7.8%;
+        --background-container: 0, 0%, 7.8%, 0.8;
+        --foreground: 210 40% 98%;
+
+        --card: 240 10% 3.9%;
+        --card-hover: 240 11% 12.5%;
+        --card-active: 240 9.5% 19%;
+        --card-foreground: 0 0% 98%;
+
+        --popover: 240 10% 3.9%;
+        --popover-foreground: 0 0% 98%;
+
+        --primary: 210 40% 98%;
+        --primary-foreground: 222.2 47.4% 11.2%;
+
+        --secondary: 217.2 32.6% 17.5%;
+        --secondary-foreground: 210 40% 98%;
+
+        --muted: 240 3.7% 15.9%;
+        --muted-foreground: 240 5% 64.9%;
+
+        --accent: 240 3.7% 15.9%;
+        --accent-secondary: 240 5% 15.9%;
+        --accent-foreground: 0 0% 98%;
+
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 40% 98%;
+
+        --border: 240 3.7% 15.9%;
+        --border-hover: 240 3.7% 20.9%;
+        --border-active: 240 3.7% 25.9%;
+        --input: 240 3.7% 15.9%;
+        --input-unread: 240 3.7% 50%;
+        --ring: 240 4.9% 83.9%;
+        --text: 0 0% 100%;
+        --text-secondary: 0 0% 80%;
+        --shadow: #ffffff05;
+
+        --radius: 0.5rem;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .wrapper {
+        width: 80vw;
+        max-width: 720px;
+        height: max-content;
+        margin: auto;
+        padding: 2rem;
+    }
+
+    .drop-window {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 200px;
+        height: 20vh;
+        border: 2px dashed hsl(var(--border));
+        border-radius: var(--radius);
+        transition: .25s;
+        margin: 12px 0;
+        cursor: pointer;
+        color: hsl(var(--text-secondary));
+    }
+
+    .output-text {
+        width: 100%;
+        border: 1px solid hsl(var(--border));
+        border-radius: var(--radius);
+        padding: 1rem;
+        margin-top: 1rem;
+        text-align: center;
+        color: hsl(var(--text-secondary));
+        word-break: break-all;
+    }
+</style>
+</head>
+<body>
+<div class="wrapper">
+    <label for="file" class="drop-window">
+        <input type="file" id="file" style="display: none">
+        <span>Click to upload a file</span>
+    </label>
+    <div id="output" class="output-text"></div>
+</div>
+<script>
+    const input = document.getElementById('file');
+    const output = document.getElementById('output');
+
+    async function post(file) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const resp = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await resp.json();
+            return data.content || data.error;
+        } catch (e) {
+            console.error(e);
+            return e.message;
+        }
+    }
+
+    input.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        const content = await post(file);
+        output.innerText = content.replace(/\\n/g, '\n');
+    });
+</script>
+</body>
+</html>

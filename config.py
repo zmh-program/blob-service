@@ -1,7 +1,5 @@
 from os import environ
 
-EXPOSE = "https://blob.chatnio.net"
-SERVICE = "https://www.chatnio.net"
 MAX_FILE_SIZE = 1024 ** 2 * 25  # deprecated in favor of `upload_max_size` in nginx.conf
 CORS_ALLOW_ORIGINS = ["*"]
 

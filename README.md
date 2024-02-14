@@ -5,10 +5,10 @@ File Service for Chat Nio
 - Text
 - Image
 - Audio (_require Azure Speech to Text Service_)
-- Docx
+- Docx (_not support .doc_)
 - Pdf
-- Pptx
-- Xlsx
+- Pptx (_not support doc_)
+- Xlsx (_support .xls_)
 
 
 ## Run

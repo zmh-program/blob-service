@@ -11,6 +11,9 @@ def is_pptx(filename: str) -> bool:
 
 def process(file: UploadFile) -> str:
     """Process PowerPoint presentation and return its contents."""
+    if file.filename.endswith(".ppt"):
+        raise ValueError(".ppt files are not supported, only .pptx files are supported.")
+
     content = file.file.read()
     return pptx_to_text(content)
 

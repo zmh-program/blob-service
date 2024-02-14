@@ -1,6 +1,7 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from processor import process_file
 from config import *
 
@@ -18,15 +19,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 def root():
-    return {
-        "status": True,
-        "project": "Chat Nio Blob Service",
-        "description": "file processing and storage service",
-        "service": SERVICE,
-        "docs": EXPOSE + "/docs",
-        "interface": EXPOSE + "/redoc",
-        "repository": "https://github.com/Deeptrain-Community/chatnio-blob-service",
-    }
+    return FileResponse("index.html", media_type="text/html")
 
 
 @app.post("/upload")
