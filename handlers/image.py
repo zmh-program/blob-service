@@ -21,4 +21,4 @@ def process(file: UploadFile) -> str:
 
     contents = file.file.read()
     encoded = base64.b64encode(contents).decode("utf-8")
-    return f"data:image/{file.content_type};base64,{encoded}"
+    return f"data:{file.content_type};base64,{encoded}"
