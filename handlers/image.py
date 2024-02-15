@@ -19,6 +19,6 @@ def is_image(filename: str) -> bool:
 def process(file: UploadFile) -> str:
     """Process image and return its base64 url."""
 
-    contents = file.file.read()
+    contents = file.read()
     encoded = base64.b64encode(contents).decode("utf-8")
     return f"data:{file.content_type};base64,{encoded}"
