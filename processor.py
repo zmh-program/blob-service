@@ -23,7 +23,7 @@ async def process_file(file: UploadFile = File(...)) -> str:
     elif xlsx.is_xlsx(filename):
         return xlsx.process(file)
     elif image.is_image(filename):
-        return image.process(file)
+        return await image.process(file)
     elif ENABLE_AZURE_SPEECH and speech.is_audio(filename):
         return speech.process(file)
 

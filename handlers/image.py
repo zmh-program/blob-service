@@ -16,9 +16,9 @@ def is_image(filename: str) -> bool:
     return filename.split(".")[-1] in COMMON_IMAGE_EXTENSIONS
 
 
-def process(file: UploadFile) -> str:
+async def process(file: UploadFile) -> str:
     """Process image and return its base64 url."""
 
-    contents = file.read()
+    contents = await file.read()
     encoded = base64.b64encode(contents).decode("utf-8")
     return f"data:{file.content_type};base64,{encoded}"
