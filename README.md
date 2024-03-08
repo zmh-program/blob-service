@@ -3,7 +3,7 @@ File Service for Chat Nio
 
 ## Supported File Types
 - Text
-- Image
+- Image (_require vision models_)
 - Audio (_require Azure Speech to Text Service_)
 - Docx (_not support .doc_)
 - Pdf
