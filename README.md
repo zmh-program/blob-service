@@ -1,5 +1,12 @@
-# chatnio-blob-service
-File Service for Chat Nio
+<div align="center">
+    
+# 📦 Chat Nio Blob Service
+
+**File Service for Chat Nio**
+
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Deeptrain-Community/chatnio-blob-service)
+
+</div>
 
 ## Supported File Types
 - Text
