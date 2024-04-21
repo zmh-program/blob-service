@@ -1,6 +1,6 @@
 from fastapi import UploadFile, File
 
-from config import ENABLE_AZURE_SPEECH
+from config import ENABLE_AZURE_SPEECH, MAX_FILE_SIZE
 from handlers import (
     pdf,
     word,
@@ -11,8 +11,19 @@ from handlers import (
 )
 
 
+async def read_file_size(file: UploadFile) -> float:
+    """Read file size and return it in MiB."""
+    return len(await file.read()) / (1024 * 1024)
+
+
 async def process_file(file: UploadFile = File(...)) -> str:
     """Process file and return its contents."""
+
+    if MAX_FILE_SIZE > 0:
+        file_size = await read_file_size(file)
+        if file_size > MAX_FILE_SIZE:
+            raise ValueError(f"File size {file_size:.2f} MiB exceeds the limit of {MAX_FILE_SIZE} MiB.")
+
     filename = file.filename.lower()
     if pdf.is_pdf(filename):
         return pdf.process(file)

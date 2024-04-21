@@ -59,6 +59,9 @@ Response
 }
 ```
 
-Environment Variables
+## Environment Variables
+- `MAX_FILE_SIZE`: Max File Size MiB (Default: No Limit)
+- `CORS_ALLOW_ORIGINS`: CORS Allow Origins (Default: `*`)
+  - e.g.: *http://localhost:3000,https://example.com*
 - `AZURE_SPEECH_KEY`: Azure Speech to Text Service Key (Required for Audio Support)
 - `AZURE_SPEECH_REGION`: Azure Speech to Text Service Region (Required for Audio Support)
