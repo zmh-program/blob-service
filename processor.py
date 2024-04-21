@@ -13,7 +13,13 @@ from handlers import (
 
 async def read_file_size(file: UploadFile) -> float:
     """Read file size and return it in MiB."""
-    return len(await file.read()) / (1024 * 1024)
+
+    # dont using file.read() directly because it will consume the file content
+    file_size = 0
+    while chunk := await file.read(20480):  # read chunk of 20KiB per iteration
+        file_size += len(chunk)
+    await file.seek(0)
+    return file_size / 1024 / 1024
 
 
 async def process_file(file: UploadFile = File(...)) -> str:

@@ -9,3 +9,6 @@ AZURE_SPEECH_REGION = environ.get("AZURE_SPEECH_REGION")  # e.g. "eastus"
 ENABLE_AZURE_SPEECH = AZURE_SPEECH_KEY and AZURE_SPEECH_REGION
 
 MAX_FILE_SIZE = float(environ.get("MAX_FILE_SIZE", -1))  # Max File Size (unit: MiB)
+
+STORAGE_TYPE = environ.get("STORAGE_TYPE", "common").lower()  # Storage Type
+LOCAL_STORAGE_DOMAIN = environ.get("LOCAL_STORAGE_DOMAIN", "").rstrip("/")  # Local Storage Domain

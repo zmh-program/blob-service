@@ -1,5 +1,5 @@
 from fastapi import UploadFile
-import base64
+from store.store import process_image
 
 COMMON_IMAGE_EXTENSIONS = {
     "png", "jpg", "jpeg", "gif", "bmp", "svg", "webp",
@@ -17,8 +17,6 @@ def is_image(filename: str) -> bool:
 
 
 async def process(file: UploadFile) -> str:
-    """Process image and return its base64 url."""
+    """Process image."""
 
-    contents = await file.read()
-    encoded = base64.b64encode(contents).decode("utf-8")
-    return f"data:{file.content_type};base64,{encoded}"
+    return await process_image(file)
