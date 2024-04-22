@@ -24,3 +24,7 @@ S3_SIGN_VERSION = environ.get("S3_SIGN_VERSION", None)  # S3 Sign Version
 S3_API = S3_DOMAIN or f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com"  # S3 API
 S3_SPACE = S3_DIRECT_URL_DOMAIN or S3_API  # S3 Image URL Domain
 
+TG_ENDPOINT = environ.get("TG_ENDPOINT", "").rstrip("/")  # Telegram Endpoint
+TG_PASSWORD = environ.get("TG_PASSWORD", "")  # Telegram Password
+
+TG_API = TG_ENDPOINT + "/api" + (f"?pass={TG_PASSWORD}" if TG_PASSWORD and len(TG_PASSWORD) > 0 else "")

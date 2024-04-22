@@ -72,8 +72,7 @@ Response
 
 ## Image Storage Config
 1. ✨ No Storage (Default)
-   - [x] Base64 Encoding
-   - [x] No Storage Required & No External Dependencies
+   - [x] **No Storage Required & No External Dependencies**
    - [x] Support Serverless Deployment **Without Storage** (e.g. Vercel)
 
 2. 📁 Local Storage
@@ -96,8 +95,8 @@ Response
      - set env `S3_BUCKET` to your AWS S3 Bucket Name
      - set env `S3_REGION` to your AWS S3 Region
 
-4. 🔔 Cloudflare R2
-   - [x] **Free Storage Quota ([10GB Storage](https://developers.cloudflare.com/r2/pricing/))**
+4. 🔔 [Cloudflare R2](https://www.cloudflare.com/zh-cn/developer-platform/r2)
+   - [x] **Free Storage Quota ([10GB Storage & Zero Outbound Cost]((https://developers.cloudflare.com/r2/pricing/)))**
    - [x] Support Direct URL Access
    - Config *(S3 Compatible)*:
      - set env `STORAGE_TYPE` to `s3` (e.g. `STORAGE_TYPE=s3`)
@@ -107,7 +106,7 @@ Response
      - set env `S3_DOMAIN` to your Cloudflare R2 Domain Name (e.g. `https://<account-id>.r2.cloudflarestorage.com`)
      - set env `S3_DIRECT_URL_DOMAIN` to your Cloudflare R2 Public URL Access Domain Name ([Open Public URL Access](https://developers.cloudflare.com/r2/buckets/public-buckets/), e.g. `https://pub-xxx.r2.dev`)
 
-5. 📦 Min IO
+5. 📦 [Min IO](https://min.io)
     - [x] **Self Hosted**
     - [x] Reliable & Flexible Storage
     - Config *(S3 Compatible)*:
@@ -118,3 +117,11 @@ Response
       - set env `S3_BUCKET` to your Min IO Bucket Name
       - set env `S3_DOMAIN` to your Min IO Domain Name (e.g. `https://oss.example.com`)
       - *[Optional] If you are using CDN, you can set `S3_DIRECT_URL_DOMAIN` to your Min IO Public URL Access Domain Name (e.g. `https://cdn-hk.example.com`)*
+
+6. ❤ [Telegram CDN](https://github.com/csznet/tgState)
+    - [x] **Free Storage (Rate Limit)**
+    - [x] Support Direct URL Access *(China Mainland User Unfriendly)*
+    - [x] Config:
+      - set env `STORAGE_TYPE` to `tg` (e.g. `STORAGE_TYPE=tg`)
+      - set env `TG_ENDPOINT` to your TG-STATE Endpoint (e.g. `TG_ENDPOINT=https://tgstate.vercel.app`)
+      - *[Optional] if you are using password authentication, you can set `TG_PASSWORD` to your TG-STATE Password*
