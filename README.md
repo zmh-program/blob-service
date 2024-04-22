@@ -73,6 +73,7 @@ Response
 ## Image Storage Config
 1. ✨ No Storage (Default)
    - [x] **No Storage Required & No External Dependencies**
+   - [x] Base64 Encoding/Decoding
    - [x] Support Serverless Deployment **Without Storage** (e.g. Vercel)
 
 2. 📁 Local Storage
