@@ -1,15 +1,12 @@
-from datetime import datetime
-
 from fastapi import UploadFile
-
 from config import LOCAL_STORAGE_DOMAIN
-from util import md5_encode
+from store.utils import store_filename
 
 
 async def process_local(file: UploadFile) -> str:
-    """Process image and return its base64 url."""
+    """Process image and return its direct url."""
 
-    filename = md5_encode(file.filename + datetime.now().isoformat())
+    filename = store_filename(file.filename)
     path = f"static/{filename}"
 
     with open(path, "wb") as f:

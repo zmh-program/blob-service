@@ -12,3 +12,15 @@ MAX_FILE_SIZE = float(environ.get("MAX_FILE_SIZE", -1))  # Max File Size (unit: 
 
 STORAGE_TYPE = environ.get("STORAGE_TYPE", "common").lower()  # Storage Type
 LOCAL_STORAGE_DOMAIN = environ.get("LOCAL_STORAGE_DOMAIN", "").rstrip("/")  # Local Storage Domain
+
+S3_BUCKET = environ.get("S3_BUCKET", "")  # S3 Bucket
+S3_ACCESS_KEY = environ.get("S3_ACCESS_KEY", "")  # S3 Access Key
+S3_SECRET_KEY = environ.get("S3_SECRET_KEY", "")  # S3 Secret Key
+S3_REGION = environ.get("S3_REGION", "")  # S3 Region
+S3_DOMAIN = environ.get("S3_DOMAIN", "").rstrip("/")  # S3 Domain (Optional)
+S3_DIRECT_URL_DOMAIN = environ.get("S3_DIRECT_URL_DOMAIN", "").rstrip("/")  # S3 Direct/Proxy URL Domain (Optional)
+S3_SIGN_VERSION = environ.get("S3_SIGN_VERSION", None)  # S3 Sign Version
+
+S3_API = S3_DOMAIN or f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com"  # S3 API
+S3_SPACE = S3_DIRECT_URL_DOMAIN or S3_API  # S3 Image URL Domain
+

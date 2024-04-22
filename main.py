@@ -22,6 +22,11 @@ def root():
     return FileResponse("index.html", media_type="text/html")
 
 
+@app.get("/favicon.ico")
+def favicon():
+    return FileResponse("favicon.ico")
+
+
 @app.post("/upload")
 async def upload(file: UploadFile = File(...)):
     """Accepts file and returns its contents."""

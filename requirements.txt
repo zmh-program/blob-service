@@ -8,5 +8,8 @@ python-pptx
 openpyxl
 xlrd
 
+boto3
+botocore
 azure-cognitiveservices-speech
+
 cryptography

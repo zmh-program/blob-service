@@ -85,14 +85,36 @@ Response
      - set env `LOCAL_STORAGE_DOMAIN` to your deployment domain (e.g. `LOCAL_STORAGE_DOMAIN=http://blob-service.onrender.com`)
      - if you are using Docker, you need to mount volume `/static` to the host (e.g. `-v /path/to/static:/static`)
      
-3. 🚀 AWS S3 Storage
+3. 🚀 AWS S3
    - [ ] **Payment Storage Cost**
    - [x] Support Direct URL Access
    - [x] China Mainland User Friendly
    - Config:
      - set env `STORAGE_TYPE` to `s3` (e.g. `STORAGE_TYPE=s3`)
-     - set env `AWS_ACCESS_KEY_ID` to your AWS Access Key ID
-     - set env `AWS_SECRET_ACCESS_KEY` to your AWS Secret Access Key
-     - set env `AWS_S3_BUCKET` to your AWS S3 Bucket Name
-     - set env `AWS_S3_REGION` to your AWS S3 Region
-     - set env `AWS_S3_DOMAIN` to your AWS S3 Domain (e.g. `https://s3.amazonaws.com`)
+     - set env `S3_ACCESS_KEY` to your AWS Access Key ID
+     - set env `S3_SECRET_KEY` to your AWS Secret Access Key
+     - set env `S3_BUCKET` to your AWS S3 Bucket Name
+     - set env `S3_REGION` to your AWS S3 Region
+
+4. 🔔 Cloudflare R2
+   - [x] **Free Storage Quota ([10GB Storage](https://developers.cloudflare.com/r2/pricing/))**
+   - [x] Support Direct URL Access
+   - Config *(S3 Compatible)*:
+     - set env `STORAGE_TYPE` to `s3` (e.g. `STORAGE_TYPE=s3`)
+     - set env `S3_ACCESS_KEY` to your Cloudflare R2 Access Key ID
+     - set env `S3_SECRET_KEY` to your Cloudflare R2 Secret Access Key
+     - set env `S3_BUCKET` to your Cloudflare R2 Bucket Name
+     - set env `S3_DOMAIN` to your Cloudflare R2 Domain Name (e.g. `https://<account-id>.r2.cloudflarestorage.com`)
+     - set env `S3_DIRECT_URL_DOMAIN` to your Cloudflare R2 Public URL Access Domain Name ([Open Public URL Access](https://developers.cloudflare.com/r2/buckets/public-buckets/), e.g. `https://pub-xxx.r2.dev`)
+
+5. 📦 Min IO
+    - [x] **Self Hosted**
+    - [x] Reliable & Flexible Storage
+    - Config *(S3 Compatible)*:
+      - set env `STORAGE_TYPE` to `s3` (e.g. `STORAGE_TYPE=s3`)
+      - set env `S3_SIGN_VERSION` to `s3v4` (e.g. `S3_SIGN_VERSION=s3v4`)
+      - set env `S3_ACCESS_KEY` to your Min IO Access Key ID
+      - set env `S3_SECRET_KEY` to your Min IO Secret Access Key
+      - set env `S3_BUCKET` to your Min IO Bucket Name
+      - set env `S3_DOMAIN` to your Min IO Domain Name (e.g. `https://oss.example.com`)
+      - *[Optional] If you are using CDN, you can set `S3_DIRECT_URL_DOMAIN` to your Min IO Public URL Access Domain Name (e.g. `https://cdn-hk.example.com`)*
