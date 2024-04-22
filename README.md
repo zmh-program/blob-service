@@ -85,7 +85,7 @@ Response
      - set env `LOCAL_STORAGE_DOMAIN` to your deployment domain (e.g. `LOCAL_STORAGE_DOMAIN=http://blob-service.onrender.com`)
      - if you are using Docker, you need to mount volume `/static` to the host (e.g. `-v /path/to/static:/static`)
      
-3. 🚀 AWS S3
+3. 🚀 [AWS S3](https://aws.amazon.com/s3)
    - [ ] **Payment Storage Cost**
    - [x] Support Direct URL Access
    - [x] China Mainland User Friendly
