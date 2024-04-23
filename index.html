@@ -218,12 +218,21 @@
         loading.classList.add('hidden');
     }
 
+    // input box change event
     input.addEventListener('change', async e => {
         const file = e.target.files[0];
         if (!file) return;
 
         await handler(file);
         input.value = '';
+    });
+
+    // window copy event
+    document.body.addEventListener('paste', async e => {
+        const file = e.clipboardData.files[0];
+        if (!file) return;
+
+        await handler(file);
     });
 </script>
 </body>

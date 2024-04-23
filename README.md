@@ -14,7 +14,7 @@
 - Audio (_require Azure Speech to Text Service_)
 - Docx (_not support .doc_)
 - Pdf
-- Pptx (_not support doc_)
+- Pptx (_not support .ppt_)
 - Xlsx (_support .xls_)
 
 
