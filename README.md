@@ -48,7 +48,8 @@ docker run -p 8000:8000 programzmh/chatnio-blob-service
 `POST` `/upload` Upload a file
 ```json
 {
-    "file": "file"
+    "file": "file",
+    "model": "gpt-4-turbo-preview" // optional (for ocr models detection)
 }
 ```
 
@@ -87,7 +88,28 @@ When OCR is enabled, the service will automatically extract text from the image 
 - `OCR_ENDPOINT` Paddle OCR Endpoint ([Deploy PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI))
     - e.g.: *http://example.com:8000*
 
+Advanced OCR Config:
+- `OCR_SKIP_MODELS`: Skip OCR Models List
+    - e.g.: *gpt-4-v,gpt-4-vision-preview,gpt-4-turbo*, then the service will skip these models and directly store the image.
+      - Tips: Each model has character inclusion matching, so when you set `gpt-4-v` model, it will skip all models that contain **gpt-4-v** (like azure-**gpt-4-v**ision-preview, **gpt-4-v**ision-preview will be also matched).
+- `OCR_SPEC_MODELS`: Specific OCR Models List
+    - then although the image has marked as `SKIP_MODELS`, the service will still ocr process the image with this model first.
+    - for example, you can set env to *gpt-4-turbo-preview*, when you set `gpt-4-turbo` to `SKIP_MODELS` because `gpt-4-turbo` support builtin vision, don't need to use OCR, but `gpt-4-turbo-preview` cannot vision, then you can set it to `SPEC_MODELS` to process the image.
+
+EXAMPLE OCR Config:
+```env
+OCR_ENABLED=1
+OCR_ENDPOINT=http://example.com:8000
+OCR_SKIP_MODELS=gpt-4-v,gpt-4-all,gpt-4-vision-preview,gpt-4-turbo,gemini-pro-vision,gemini-1.5-pro,claude-3,glm-4v
+OCR_SPEC_MODELS=gpt-4-turbo-preview,claude-3-haiku
+```
+
 ### 🖼 Image Storage Config
+> [!NOTE]
+> **When OCR is enabled, the service will firstly using OCR then store the images.**
+>
+> **You can configure the OCR Advanced Config to control the OCR Models Filtering.**
+
 1. ✨ No Storage (Default)
    - [x] **No Storage Required & No External Dependencies**
    - [x] Base64 Encoding/Decoding

@@ -1,4 +1,5 @@
 from hashlib import sha256, md5
+from typing import List
 
 
 def sha2_file(filename) -> str:
@@ -21,3 +22,10 @@ def sha2_encode(string) -> str:
 def md5_encode(string) -> str:
     """Returns hash of string."""
     return md5(string.encode("utf-8")).hexdigest()
+
+
+def contains(value: str, items: List[str]) -> bool:
+    """Returns True if value is in items or contains it."""
+
+    return any(item in value for item in items)
+

@@ -1,7 +1,5 @@
 from fastapi import UploadFile
-
-from config import OCR_ENABLED
-from handlers.ocr import ocr_image
+from handlers.ocr import ocr_image, could_enable_ocr
 from store.store import process_image
 
 COMMON_IMAGE_EXTENSIONS = {
@@ -19,9 +17,9 @@ def is_image(filename: str) -> bool:
     return filename.split(".")[-1] in COMMON_IMAGE_EXTENSIONS
 
 
-async def process(file: UploadFile) -> str:
+async def process(file: UploadFile, model: str) -> str:
     """Process image."""
-    if OCR_ENABLED:
+    if could_enable_ocr(model):
         return ocr_image(file)
 
     return await process_image(file)

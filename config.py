@@ -33,3 +33,5 @@ TG_API = TG_ENDPOINT + "/api" + (f"?pass={TG_PASSWORD}" if TG_PASSWORD and len(T
 
 OCR_ENDPOINT = environ.get("OCR_ENDPOINT", "").rstrip("/")  # OCR Endpoint
 OCR_ENABLED = int(environ.get("OCR_ENABLED", 0)) == 1  # OCR Enabled
+OCR_SKIP_MODELS = environ.get("OCR_SKIP_MODELS", "").split(",")  # OCR Skip Models
+OCR_SPEC_MODELS = environ.get("OCR_SPEC_MODELS", "").split(",")  # OCR Specific Models

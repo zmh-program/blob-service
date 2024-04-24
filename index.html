@@ -129,6 +129,19 @@
         word-wrap: break-word;
     }
 
+    .model-input {
+        width: 100%;
+        height: 40px;
+        border: 1px solid hsl(var(--border));
+        border-radius: var(--radius);
+        padding: 0 1rem;
+        margin-bottom: 1rem;
+        outline: none;
+        text-align: center;
+        color: hsl(var(--text-secondary));
+        background: hsl(var(--background));
+    }
+
     .loading {
         width: 0.75rem;
         height: 0.75rem;
@@ -181,15 +194,18 @@
             Click to upload a file
         </span>
     </label>
+    <input type="text" id="model" placeholder="Please enter the model name (e.g. gpt-4)" class="model-input" value="gpt-4-turbo">
     <div id="output" class="output-text"></div>
 </div>
 <script>
     const input = document.getElementById('file');
     const output = document.getElementById('output');
+    const model = document.getElementById('model');
 
     async function post(file) {
         const formData = new FormData();
         formData.append('file', file);
+        formData.append('model', model.value);
 
         try {
             const resp = await fetch('/upload', {

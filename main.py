@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
@@ -28,11 +28,11 @@ def favicon():
 
 
 @app.post("/upload")
-async def upload(file: UploadFile = File(...)):
+async def upload(file: UploadFile = File(...), model: str = Form(...)):
     """Accepts file and returns its contents."""
 
     try:
-        contents = await process_file(file)
+        contents = await process_file(file, model)
         return {
             "status": True,
             "content": contents,

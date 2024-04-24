@@ -1,10 +1,13 @@
 from fastapi import UploadFile, File
 import requests
-from config import OCR_ENDPOINT
+from config import OCR_ENDPOINT, OCR_ENABLED, OCR_SKIP_MODELS, OCR_SPEC_MODELS
 import time
+from typing import List
+
+from util import contains
 
 
-def get_ocr_source(data: any) -> list:
+def get_ocr_source(data: any) -> List[str]:
     if type(data) is str:
         return [data]
     elif type(data) is list:
@@ -34,3 +37,19 @@ def ocr_image(file: UploadFile = File(...)) -> str:
     print(f"[orc] time taken: {time.time() - start:.2f}s (file: {file.filename})")
 
     return " ".join(get_ocr_source(result))
+
+
+def could_enable_ocr(model: str = "") -> bool:
+    if not OCR_ENABLED:
+        # if OCR is disabled
+        return False
+
+    if contains(model, OCR_SKIP_MODELS):
+        # if model is in skip list
+        return False
+
+    if len(OCR_SPEC_MODELS) > 0 and not contains(model, OCR_SPEC_MODELS):
+        # if specific models are defined and model is not in the list
+        return False
+
+    return True
