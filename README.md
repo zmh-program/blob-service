@@ -94,7 +94,7 @@ Advanced OCR Config:
       - Tips: Each model has character inclusion matching, so when you set `gpt-4-v` model, it will skip all models that contain **gpt-4-v** (like azure-**gpt-4-v**ision-preview, **gpt-4-v**ision-preview will be also matched).
 - `OCR_SPEC_MODELS`: Specific OCR Models List (Commonly for Non-Vision Models)
     - then although the image has marked as `SKIP_MODELS`, the service will still ocr process the image with this model first.
-    - for example, you can set env to *gpt-4-turbo-preview*, when you set `gpt-4-turbo` to `SKIP_MODELS` that because `gpt-4-turbo` support vision and don't need to use OCR, but `gpt-4-turbo-preview` cannot vision and need OCR, then you can set `gpt-4-turbo-preview` to `SPEC_MODELS` to ocr process the image.
+    - for example, when you set `gpt-4-turbo` to `SKIP_MODELS` (because `gpt-4-turbo` support vision and don't need to use OCR, `gpt-4-turbo-preview` cannot vision and need OCR), commonly the **gpt-4-turbo**-preview will be marked as **gpt-4-turbo** and skipped, then you can set `gpt-4-turbo-preview` to `SPEC_MODELS` to force OCR process.
 
 EXAMPLE OCR Config:
 ```env
