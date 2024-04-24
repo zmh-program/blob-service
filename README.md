@@ -89,18 +89,18 @@ When OCR is enabled, the service will automatically extract text from the image 
     - e.g.: *http://example.com:8000*
 
 Advanced OCR Config:
-- `OCR_SKIP_MODELS`: Skip OCR Models List
+- `OCR_SKIP_MODELS`: Skip OCR Models List (Commonly for Vision Models)
     - e.g.: *gpt-4-v,gpt-4-vision-preview,gpt-4-turbo*, then the service will skip these models and directly store the image.
       - Tips: Each model has character inclusion matching, so when you set `gpt-4-v` model, it will skip all models that contain **gpt-4-v** (like azure-**gpt-4-v**ision-preview, **gpt-4-v**ision-preview will be also matched).
-- `OCR_SPEC_MODELS`: Specific OCR Models List
+- `OCR_SPEC_MODELS`: Specific OCR Models List (Commonly for Non-Vision Models)
     - then although the image has marked as `SKIP_MODELS`, the service will still ocr process the image with this model first.
-    - for example, you can set env to *gpt-4-turbo-preview*, when you set `gpt-4-turbo` to `SKIP_MODELS` because `gpt-4-turbo` support builtin vision, don't need to use OCR, but `gpt-4-turbo-preview` cannot vision, then you can set it to `SPEC_MODELS` to process the image.
+    - for example, you can set env to *gpt-4-turbo-preview*, when you set `gpt-4-turbo` to `SKIP_MODELS` that because `gpt-4-turbo` support vision and don't need to use OCR, but `gpt-4-turbo-preview` cannot vision and need OCR, then you can set `gpt-4-turbo-preview` to `SPEC_MODELS` to ocr process the image.
 
 EXAMPLE OCR Config:
 ```env
 OCR_ENABLED=1
 OCR_ENDPOINT=http://example.com:8000
-OCR_SKIP_MODELS=gpt-4-v,gpt-4-all,gpt-4-vision-preview,gpt-4-turbo,gemini-pro-vision,gemini-1.5-pro,claude-3,glm-4v
+OCR_SKIP_MODELS=vision,gpt-4-v,gpt-4-all,gpt-4-vision-preview,gpt-4-1106-vision-preview,gpt-4-turbo,gemini-pro-vision,gemini-1.5-pro,claude-3,glm-4v
 OCR_SPEC_MODELS=gpt-4-turbo-preview,claude-3-haiku
 ```
 
