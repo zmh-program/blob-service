@@ -8,6 +8,13 @@
 
 </div>
 
+## Features
+- ⚡ **Out-of-the-Box**: No External Dependencies Required, Support Vercel/Render One-Click Deployment
+- ⭐ **Multiple File Types**: Support Text, Pdf, Docx, Excel, Image, Audio etc.
+- 📦 **Multiple Storage Options**: Base64, Local, S3, Cloudflare R2, Min IO, Telegram CDN etc.
+- 🔍 **OCR Support**: Extract Text from Image (Require Paddle OCR API)
+- 🔊 **Audio Support**: Convert Audio to Text (Require Azure Speech to Text Service)
+
 ## Supported File Types
 - Text
 - Image (_require vision models_)
@@ -79,32 +86,6 @@ Response
 - `AZURE_SPEECH_REGION`: Azure Speech to Text Service Region (Required for Audio Support)
 
 
-### 🔍 OCR Config (Optional)
-> [!NOTE]
-> OCR Support is based on [PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI), please deploy the API to use OCR feature.
-> 
-> When OCR is enabled, the service will automatically extract text from the image and **skip the original image storage solution** below.
-
-- `OCR_ENABLED` Image OCR Enabled (`1` for **Enabled**, `0` for **Disabled**, Default is **Disabled**)
-- `OCR_ENDPOINT` Paddle OCR Endpoint ([Deploy PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI))
-    - e.g.: *http://example.com:8000*
-
-Advanced OCR Config:
-- `OCR_SKIP_MODELS`: Skip OCR Models List (Commonly for Vision Models)
-    - e.g.: *gpt-4-v,gpt-4-vision-preview,gpt-4-turbo*, then the service will skip these models and directly store the image.
-      - Tips: Each model has character inclusion matching, so when you set `gpt-4-v` model, it will skip all models that contain **gpt-4-v** (like azure-**gpt-4-v**ision-preview, **gpt-4-v**ision-preview will be also matched).
-- `OCR_SPEC_MODELS`: Specific OCR Models List (Commonly for Non-Vision Models)
-    - then although the image has marked as `SKIP_MODELS`, the service will still ocr process the image with this model first.
-    - for example, when you set `gpt-4-turbo` to `SKIP_MODELS` (because `gpt-4-turbo` support vision and don't need to use OCR, `gpt-4-turbo-preview` cannot vision and need OCR), commonly the **gpt-4-turbo**-preview will be marked as **gpt-4-turbo** and skipped, then you can set `gpt-4-turbo-preview` to `SPEC_MODELS` to force OCR process.
-
-EXAMPLE OCR Config:
-```env
-OCR_ENABLED=1
-OCR_ENDPOINT=http://example.com:8000
-OCR_SKIP_MODELS=vision,gpt-4-v,gpt-4-all,gpt-4-vision-preview,gpt-4-1106-vision-preview,gpt-4-turbo,gemini-pro-vision,gemini-1.5-pro,claude-3,glm-4v
-OCR_SPEC_MODELS=gpt-4-turbo-preview,claude-3-haiku
-```
-
 
 ### 🖼 Image Storage Config (Optional)
 > [!NOTE]
@@ -167,3 +148,31 @@ OCR_SPEC_MODELS=gpt-4-turbo-preview,claude-3-haiku
       - set env `STORAGE_TYPE` to `tg` (e.g. `STORAGE_TYPE=tg`)
       - set env `TG_ENDPOINT` to your TG-STATE Endpoint (e.g. `TG_ENDPOINT=https://tgstate.vercel.app`)
       - *[Optional] if you are using password authentication, you can set `TG_PASSWORD` to your TG-STATE Password*
+
+
+
+### 🔍 OCR Config (Optional)
+> [!NOTE]
+> OCR Support is based on [PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI), please deploy the API to use OCR feature.
+> 
+> When OCR is enabled, the service will automatically extract text from the image and **skip the original image storage solution** below.
+
+- `OCR_ENABLED` Image OCR Enabled (`1` for **Enabled**, `0` for **Disabled**, Default is **Disabled**)
+- `OCR_ENDPOINT` Paddle OCR Endpoint ([Deploy PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI))
+    - e.g.: *http://example.com:8000*
+
+Advanced OCR Config:
+- `OCR_SKIP_MODELS`: Skip OCR Models List (Commonly for Vision Models)
+    - e.g.: *gpt-4-v,gpt-4-vision-preview,gpt-4-turbo*, then the service will skip these models and directly store the image.
+      - Tips: Each model has character inclusion matching, so when you set `gpt-4-v` model, it will skip all models that contain **gpt-4-v** (like azure-**gpt-4-v**ision-preview, **gpt-4-v**ision-preview will be also matched).
+- `OCR_SPEC_MODELS`: Specific OCR Models List (Commonly for Non-Vision Models)
+    - then although the image has marked as `SKIP_MODELS`, the service will still ocr process the image with this model first.
+    - for example, when you set `gpt-4-turbo` to `SKIP_MODELS` (because `gpt-4-turbo` support vision and don't need to use OCR, `gpt-4-turbo-preview` cannot vision and need OCR), commonly the **gpt-4-turbo**-preview will be marked as **gpt-4-turbo** and skipped, then you can set `gpt-4-turbo-preview` to `SPEC_MODELS` to force OCR process.
+
+EXAMPLE OCR Config:
+```env
+OCR_ENABLED=1
+OCR_ENDPOINT=http://example.com:8000
+OCR_SKIP_MODELS=vision,gpt-4-v,gpt-4-all,gpt-4-vision-preview,gpt-4-1106-vision-preview,gpt-4-turbo,gemini-pro-vision,gemini-1.5-pro,claude-3,glm-4v
+OCR_SPEC_MODELS=gpt-4-turbo-preview,claude-3-haiku
+```
