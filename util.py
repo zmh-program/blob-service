@@ -27,5 +27,5 @@ def md5_encode(string) -> str:
 def contains(value: str, items: List[str]) -> bool:
     """Returns True if value is in items or contains it."""
 
-    return any(item in value for item in items)
+    return any(item in value for item in items if item)
 

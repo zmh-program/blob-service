@@ -48,12 +48,13 @@ def could_enable_ocr(model: str = "") -> bool:
         # if model is not defined
         return True
 
+    if len(OCR_SPEC_MODELS) > 0:
+        if contains(model, OCR_SPEC_MODELS):
+            # if model is in specific list
+            return True
+
     if contains(model, OCR_SKIP_MODELS):
         # if model is in skip list
-        return False
-
-    if len(OCR_SPEC_MODELS) > 0 and not contains(model, OCR_SPEC_MODELS):
-        # if specific models are defined and model is not in the list
         return False
 
     return True
