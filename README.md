@@ -79,10 +79,10 @@ Response
 - `AZURE_SPEECH_REGION`: Azure Speech to Text Service Region (Required for Audio Support)
 
 ### 🔍 OCR Config
-
-OCR Support is based on [PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI), please deploy the API to use OCR feature.
-
-When OCR is enabled, the service will automatically extract text from the image and **skip the original image storage solution** below.
+> [!NOTE]
+> OCR Support is based on [PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI), please deploy the API to use OCR feature.
+> 
+> When OCR is enabled, the service will automatically extract text from the image and **skip the original image storage solution** below.
 
 - `OCR_ENABLED` Image OCR Enabled (`1` for **Enabled**, `0` for **Disabled**, Default is **Disabled**)
 - `OCR_ENDPOINT` Paddle OCR Endpoint ([Deploy PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI))
