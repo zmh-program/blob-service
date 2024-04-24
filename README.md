@@ -64,7 +64,7 @@ Response
 ```
 
 ## Environment Variables
-### 🎨 General Config
+### 🎨 General Config (Optional)
 
 - `PDF_MAX_IMAGES`: Max Images Extracted from a PDF File
     - **0**: Never Extract Images
@@ -78,7 +78,7 @@ Response
 - `AZURE_SPEECH_KEY`: Azure Speech to Text Service Key (Required for Audio Support)
 - `AZURE_SPEECH_REGION`: Azure Speech to Text Service Region (Required for Audio Support)
 
-### 🔍 OCR Config
+### 🔍 OCR Config (Optional)
 > [!NOTE]
 > OCR Support is based on [PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI), please deploy the API to use OCR feature.
 > 
@@ -104,7 +104,7 @@ OCR_SKIP_MODELS=vision,gpt-4-v,gpt-4-all,gpt-4-vision-preview,gpt-4-1106-vision-
 OCR_SPEC_MODELS=gpt-4-turbo-preview,claude-3-haiku
 ```
 
-### 🖼 Image Storage Config
+### 🖼 Image Storage Config (Optional)
 > [!NOTE]
 > **When OCR is enabled, the service will firstly using OCR then store the images.**
 >
