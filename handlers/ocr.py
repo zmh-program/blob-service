@@ -44,6 +44,10 @@ def could_enable_ocr(model: str = "") -> bool:
         # if OCR is disabled
         return False
 
+    if len(model) == 0:
+        # if model is not defined
+        return True
+
     if contains(model, OCR_SKIP_MODELS):
         # if model is in skip list
         return False
