@@ -1,4 +1,7 @@
 from fastapi import UploadFile
+
+from config import OCR_ENABLED
+from handlers.ocr import ocr_image
 from store.store import process_image
 
 COMMON_IMAGE_EXTENSIONS = {
@@ -18,5 +21,7 @@ def is_image(filename: str) -> bool:
 
 async def process(file: UploadFile) -> str:
     """Process image."""
+    if OCR_ENABLED:
+        return ocr_image(file)
 
     return await process_image(file)

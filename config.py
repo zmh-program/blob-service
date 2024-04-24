@@ -4,6 +4,8 @@ CORS_ALLOW_ORIGINS = ["*"]  # CORS Allow Origins
 if environ.get("CORS_ALLOW_ORIGINS") and len(environ.get("CORS_ALLOW_ORIGINS")) > 0:
     CORS_ALLOW_ORIGINS = environ.get("CORS_ALLOW_ORIGINS").split(",")
 
+PDF_MAX_IMAGES = int(environ.get("PDF_MAX_IMAGES", 0))  # The maximum number of images to extract from a PDF file
+
 AZURE_SPEECH_KEY = environ.get("AZURE_SPEECH_KEY")  # Azure Speech Key
 AZURE_SPEECH_REGION = environ.get("AZURE_SPEECH_REGION")  # e.g. "eastus"
 ENABLE_AZURE_SPEECH = AZURE_SPEECH_KEY and AZURE_SPEECH_REGION
@@ -28,3 +30,6 @@ TG_ENDPOINT = environ.get("TG_ENDPOINT", "").rstrip("/")  # Telegram Endpoint
 TG_PASSWORD = environ.get("TG_PASSWORD", "")  # Telegram Password
 
 TG_API = TG_ENDPOINT + "/api" + (f"?pass={TG_PASSWORD}" if TG_PASSWORD and len(TG_PASSWORD) > 0 else "")
+
+OCR_ENDPOINT = environ.get("OCR_ENDPOINT", "").rstrip("/")  # OCR Endpoint
+OCR_ENABLED = int(environ.get("OCR_ENABLED", 0)) == 1  # OCR Enabled

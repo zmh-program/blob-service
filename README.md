@@ -63,14 +63,25 @@ Response
 ```
 
 ## Environment Variables
-- `MAX_FILE_SIZE`: Max File Size MiB (Default: No Limit)
-  - Tips: Size limit is also depend on the server configuration (e.g. Nginx/Apache Config, Vercel Free Plan Limit **5MB** Body Size) 
+### 🎨 General Config
+- `MAX_FILE_SIZE`: Max Uploaded File Size MiB (Default: No Limit)
+  - *Tips: Size limit is also depend on the server configuration (e.g. Nginx/Apache Config, Vercel Free Plan Limit **5MB** Body Size)*
 - `CORS_ALLOW_ORIGINS`: CORS Allow Origins (Default: `*`)
   - e.g.: *http://localhost:3000,https://example.com*
 - `AZURE_SPEECH_KEY`: Azure Speech to Text Service Key (Required for Audio Support)
 - `AZURE_SPEECH_REGION`: Azure Speech to Text Service Region (Required for Audio Support)
 
-## Image Storage Config
+### 🔍 OCR Config
+
+OCR Support is based on [PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI), please deploy the API to use OCR feature.
+
+When OCR is enabled, the service will automatically extract text from the image and **skip the original image storage solution** below.
+
+- `OCR_ENABLED` Image OCR Enabled (`1` for **Enabled**, `0` for **Disabled**, Default is **Disabled**)
+- `OCR_ENDPOINT` Paddle OCR Endpoint ([Deploy PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI))
+    - e.g.: *http://example.com:8000*
+
+### 🖼 Image Storage Config
 1. ✨ No Storage (Default)
    - [x] **No Storage Required & No External Dependencies**
    - [x] Base64 Encoding/Decoding
