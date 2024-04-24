@@ -9,7 +9,7 @@
 </div>
 
 ## Features
-- ⚡ **Out-of-the-Box**: No External Dependencies Required, Support Vercel/Render One-Click Deployment
+- ⚡ **Out-of-the-Box**: No External Dependencies Required & Support Vercel/Render One-Click Deployment
 - ⭐ **Multiple File Types**: Support Text, Pdf, Docx, Excel, Image, Audio etc.
 - 📦 **Multiple Storage Options**: Base64, Local, S3, Cloudflare R2, Min IO, Telegram CDN etc.
 - 🔍 **OCR Support**: Extract Text from Image (Require Paddle OCR API)
