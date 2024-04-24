@@ -3,7 +3,7 @@ fastapi
 uvicorn[standard]
 python-multipart
 
-pypdf
+pymupdf
 python-docx
 python-pptx
 openpyxl

@@ -64,6 +64,12 @@ Response
 
 ## Environment Variables
 ### 🎨 General Config
+
+- `PDF_MAX_IMAGES`: Max Images Extracted from a PDF File
+    - **0**: Never Extract Images
+    - **-1**: Extract All Images
+    - **other**: Extract Top N Images
+    - *Tips: The extracted images will be **treated as a normal image** file and directly processed*.
 - `MAX_FILE_SIZE`: Max Uploaded File Size MiB (Default: No Limit)
   - *Tips: Size limit is also depend on the server configuration (e.g. Nginx/Apache Config, Vercel Free Plan Limit **5MB** Body Size)*
 - `CORS_ALLOW_ORIGINS`: CORS Allow Origins (Default: `*`)
