@@ -176,7 +176,7 @@ Response
 
 Advanced OCR Config:
 > [!WARNING]
-> Chat Nio Version >= **4.3.1** or **3.10.9**
+> Advanced Config Chat Nio Supported Version >= **4.3.1** or **3.10.9**
 
 - `OCR_SKIP_MODELS`: Skip OCR Models List (Commonly for Vision Models)
     - e.g.: *gpt-4-v,gpt-4-vision-preview,gpt-4-turbo*, then the service will skip these models and directly store the image.
