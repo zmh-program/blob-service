@@ -25,19 +25,7 @@
 - Xlsx (_support .xls_)
 
 
-## Run
-```shell
-pip install -r requirements.txt
-uvicorn main:app --reload
-```
-Then the service will be running on `http://localhost:8000`
-
-## Deploy
-```shell
-uvicorn main:app
-```
-
-## Using Docker
+## Deploy by Docker
 > Image: `programzmh/chatnio-blob-service`
 
 ```shell
@@ -50,6 +38,21 @@ docker run -p 8000:8000 programzmh/chatnio-blob-service
 # if you are using `local` storage type, you need to mount volume (/static) to the host
 # docker run -p 8000:8000 -v /path/to/static:/static programzmh/chatnio-blob-service
 ```
+
+## Deploy by Source Code
+The service will be running on `http://localhost:8000`
+## Run
+```shell
+git clone --branch=main https://github.com/Deeptrain-Community/chatnio-blob-service
+cd chatnio-blob-service
+
+pip install -r requirements.txt
+uvicorn main:app
+
+# enable hot reload
+# uvicorn main:app --reload
+```
+
 
 ## API
 `POST` `/upload` Upload a file
@@ -176,3 +179,17 @@ OCR_ENDPOINT=http://example.com:8000
 OCR_SKIP_MODELS=vision,gpt-4-v,gpt-4-all,gpt-4-vision-preview,gpt-4-1106-vision-preview,gpt-4-turbo,gemini-pro-vision,gemini-1.5-pro,claude-3,glm-4v
 OCR_SPEC_MODELS=gpt-4-turbo-preview,claude-3-haiku
 ```
+
+## Development
+- **~/config.py**: Env Config
+- **~/main.py**: Entry Point
+- **~/utils.py**: Utilities
+- **~/handlers**: File Handlers
+- **~/store**: Storage Handlers
+- **~/static**: Static Files (if using **local** storage)
+
+## Tech Stack
+- Python & FastAPI
+
+## License
+Apache License 2.0

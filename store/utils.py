@@ -1,5 +1,5 @@
 from datetime import datetime
-from util import md5_encode
+from utils import md5_encode
 
 
 def store_filename(filename: str) -> str:

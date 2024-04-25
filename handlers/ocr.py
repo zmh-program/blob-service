@@ -4,7 +4,7 @@ from config import OCR_ENDPOINT, OCR_ENABLED, OCR_SKIP_MODELS, OCR_SPEC_MODELS
 import time
 from typing import List
 
-from util import contains
+from utils import contains
 
 
 def get_ocr_source(data: any) -> List[str]:
