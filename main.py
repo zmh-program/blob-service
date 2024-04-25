@@ -28,7 +28,7 @@ def favicon():
 
 
 @app.post("/upload")
-async def upload(file: UploadFile = File(...), model: str = Form(...)):
+async def upload(file: UploadFile = File(...), model: str = Form(default="")):
     """Accepts file and returns its contents."""
 
     try:
