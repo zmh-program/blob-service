@@ -39,6 +39,15 @@ docker run -p 8000:8000 programzmh/chatnio-blob-service
 # docker run -p 8000:8000 -v /path/to/static:/static programzmh/chatnio-blob-service
 ```
 
+> Deploy to [Render.com](https://render.com)
+> 
+> [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://dashboard.render.com/select-image?type=web&image=programzmh%2Fchatnio-blob-service)
+>
+> 
+> Select **Web Service** and **Docker** Image, then input the image `programzmh/chatnio-blob-service` and click **Create Web Service**.
+> > ⭐ Render.com Includes Free **750 Hours** of Usage per Month 
+> 
+
 ## Deploy by Source Code
 The service will be running on `http://localhost:8000`
 ## Run
@@ -100,6 +109,7 @@ Response
    - [x] **No Storage Required & No External Dependencies**
    - [x] Base64 Encoding/Decoding
    - [x] Support Serverless Deployment **Without Storage** (e.g. Vercel)
+   - [ ] No Direct URL Access *(Base64 not support models like `gpt-4-all`)*
 
 2. 📁 Local Storage
    - [ ] **Require Server Environment** (e.g. VPS, Docker)
