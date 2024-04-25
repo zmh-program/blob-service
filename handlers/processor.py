@@ -22,7 +22,7 @@ async def read_file_size(file: UploadFile) -> float:
     return file_size / 1024 / 1024
 
 
-async def process_file(file: UploadFile = File(...), model: str = "") -> str:
+async def process_file(file: UploadFile = File(...), model: str = "") -> (str, str):
     """Process file and return its contents."""
 
     if MAX_FILE_SIZE > 0:
@@ -32,17 +32,17 @@ async def process_file(file: UploadFile = File(...), model: str = "") -> str:
 
     filename = file.filename.lower()
     if pdf.is_pdf(filename):
-        return await pdf.process(file, model)
+        return "pdf", await pdf.process(file, model)
     elif word.is_docx(filename):
-        return word.process(file)
+        return "docx", word.process(file)
     elif ppt.is_pptx(filename):
-        return ppt.process(file)
+        return "pptx", ppt.process(file)
     elif xlsx.is_xlsx(filename):
-        return xlsx.process(file)
+        return "xlsx", xlsx.process(file)
     elif image.is_image(filename):
-        return await image.process(file, model)
+        return "image", await image.process(file, model)
     elif ENABLE_AZURE_SPEECH and speech.is_audio(filename):
-        return speech.process(file)
+        return "audio", speech.process(file)
 
     content = await file.read()
-    return content.decode("utf-8")
+    return "text", content.decode("utf-8")

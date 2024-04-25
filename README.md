@@ -77,6 +77,7 @@ Response
 ```json
 {
   "status": true,
+  "type": "pdf",
   "content": "...",
   "error": ""
 }

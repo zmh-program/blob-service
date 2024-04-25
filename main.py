@@ -32,15 +32,17 @@ async def upload(file: UploadFile = File(...), model: str = Form(default="")):
     """Accepts file and returns its contents."""
 
     try:
-        contents = await process_file(file, model)
+        filetype, contents = await process_file(file, model)
         return {
             "status": True,
             "content": contents,
+            "type": filetype,
             "error": "",
         }
     except Exception as e:
         return {
             "status": False,
             "content": "",
+            "type": "error",
             "error": str(e),
         }
