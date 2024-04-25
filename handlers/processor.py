@@ -32,7 +32,7 @@ async def process_file(file: UploadFile = File(...), model: str = "") -> str:
 
     filename = file.filename.lower()
     if pdf.is_pdf(filename):
-        return await pdf.process(file)
+        return await pdf.process(file, model)
     elif word.is_docx(filename):
         return word.process(file)
     elif ppt.is_pptx(filename):

@@ -1,6 +1,6 @@
 from io import BytesIO
 
-from fastapi import File, UploadFile
+from fastapi import UploadFile
 import fitz
 
 from config import PDF_MAX_IMAGES
@@ -12,7 +12,7 @@ def is_pdf(filename: str) -> bool:
     return filename.endswith(".pdf")
 
 
-async def process(file: UploadFile = File(...)) -> str:
+async def process(file: UploadFile, model: str) -> str:
     filename = file.filename.replace(" ", "_").replace(".", "_")
     doc = fitz.open("pdf", file.file.read())  # read the file from memory
     stack = []
@@ -41,7 +41,7 @@ async def process(file: UploadFile = File(...)) -> str:
 
             # create a file-like object for the image
             image_file = UploadFile(io, filename=image_name)
-            stack.append(await process_image(image_file))
+            stack.append(await process_image(image_file, model))
 
             print(f"[pdf] extracted image: {image_name} (page: {page.number}, cursor: {cursor}, max: {PDF_MAX_IMAGES})")
 
