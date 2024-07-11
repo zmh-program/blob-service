@@ -11,6 +11,6 @@ xlrd
 
 boto3
 botocore
-azure-cognitiveservices-speech
+azure-cognitiveservices-speech~=1.34.1
 
 cryptography
