@@ -119,7 +119,7 @@ Response
    - Config:
      - set env `STORAGE_TYPE` to `local` (e.g. `STORAGE_TYPE=local`)
      - set env `LOCAL_STORAGE_DOMAIN` to your deployment domain (e.g. `LOCAL_STORAGE_DOMAIN=http://blob-service.onrender.com`)
-     - if you are using Docker, you need to mount volume `/static` to the host (e.g. `-v /path/to/static:/static`)
+     - if you are using Docker, you need to mount volume `/app/static` to the host (e.g. `-v /path/to/static:/app/static`)
      
 3. 🚀 [AWS S3](https://aws.amazon.com/s3)
    - [ ] **Payment Storage Cost**
@@ -158,6 +158,7 @@ Response
 6. ❤ [Telegram CDN](https://github.com/csznet/tgState)
     - [x] **Free Storage (Rate Limit)**
     - [x] Support Direct URL Access *(China Mainland User Unfriendly)*
+    - [x] **Limited** File Type & Format
     - [x] Config:
       - set env `STORAGE_TYPE` to `tg` (e.g. `STORAGE_TYPE=tg`)
       - set env `TG_ENDPOINT` to your TG-STATE Endpoint (e.g. `TG_ENDPOINT=https://tgstate.vercel.app`)
