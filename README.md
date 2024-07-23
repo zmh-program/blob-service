@@ -2,9 +2,11 @@
     
 # 📦 Chat Nio Blob Service
 
-**File Service for Chat Nio**
+### **🤯 File Service for Chat Nio**
 
 [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Deeptrain-Community/chatnio-blob-service)
+
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/RWGFOH)
 
 </div>
 
