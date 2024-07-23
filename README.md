@@ -67,10 +67,20 @@ uvicorn main:app
 `POST` `/upload` Upload a file
 ```json
 {
-    "file": "file",
-    "model": "gpt-4-turbo-preview" // optional (for ocr models detection)
+    "file": "[file]",
+    "enable_ocr": false,
+    "enable_vision": true,
+    "save_all": false
 }
 ```
+
+| Parameter       | Type    | Description                                                                          |
+|-----------------|---------|--------------------------------------------------------------------------------------|
+| `file`          | *File   | File to Upload                                                                       |
+| `enable_ocr`    | Boolean | Enable OCR (Default: `false`) <br/>**should configure OCR config*                    |
+| `enable_vision` | Boolean | Enable Vision (Default: `true`) <br/>**skip if `enable_ocr` is true*                 |
+| `save_all`      | Boolean | Save All Images (Default: `false`) <br/>**store all types of files without handling* |
+
 
 Response
 
@@ -83,8 +93,16 @@ Response
 }
 ```
 
+| Parameter       | Type     | Description    |
+|-----------------|----------|----------------|
+| `status`        | Boolean  | Request Status |
+| `type`          | String   | File Type      |
+| `content`       | String   | File Data      |
+| `error`         | String   | Error Message  |
+
 ## Environment Variables
-### 🎨 General Config (Optional)
+
+### `1` 🎨 General Config (Optional)
 
 - `PDF_MAX_IMAGES`: Max Images Extracted from a PDF File (Default: `10`)
     - **0**: Never Extract Images
@@ -95,20 +113,19 @@ Response
   - *Tips: Size limit is also depend on the server configuration (e.g. Nginx/Apache Config, Vercel Free Plan Limit **5MB** Body Size)*
 - `CORS_ALLOW_ORIGINS`: CORS Allow Origins (Default: `*`)
   - e.g.: *http://localhost:3000,https://example.com*
+
+### `2` 🔊 Audio Config (Optional)
 - `AZURE_SPEECH_KEY`: Azure Speech to Text Service Key (Required for Audio Support)
 - `AZURE_SPEECH_REGION`: Azure Speech to Text Service Region (Required for Audio Support)
 
-
-
-### 🖼 Image Storage Config (Optional)
+### `3` 🖼 Storage Config (Optional)
 > [!NOTE]
-> **When OCR is enabled, the service will firstly using OCR then store the images.**
->
-> **You can configure the OCR Advanced Config to control the OCR Models Filtering.**
+> Storage Config Apply to **Image** Files And `Save All` Option Only.
 
 1. ✨ No Storage (Default)
    - [x] **No Storage Required & No External Dependencies**
    - [x] Base64 Encoding/Decoding
+   - [x] Do **Not** Store Anything
    - [x] Support Serverless Deployment **Without Storage** (e.g. Vercel)
    - [ ] No Direct URL Access *(Base64 not support models like `gpt-4-all`)*
 
@@ -164,36 +181,13 @@ Response
       - set env `TG_ENDPOINT` to your TG-STATE Endpoint (e.g. `TG_ENDPOINT=https://tgstate.vercel.app`)
       - *[Optional] if you are using password authentication, you can set `TG_PASSWORD` to your TG-STATE Password*
 
-
-
-### 🔍 OCR Config (Optional)
+    
+### `4` 🔍 OCR Config (Optional)
 > [!NOTE]
-> OCR Support is based on [PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI), please deploy the API to use OCR feature.
-> 
-> When OCR is enabled, the service will automatically extract text from the image and **skip the original image storage solution** below.
+> OCR Support is based on 👉 [PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI) (✔ Self Hosted ✔ Open Source)
 
-- `OCR_ENABLED` Image OCR Enabled (`1` for **Enabled**, `0` for **Disabled**, Default is **Disabled**)
-- `OCR_ENDPOINT` Paddle OCR Endpoint ([Deploy PaddleOCR API](https://github.com/cgcel/PaddleOCRFastAPI))
-    - e.g.: *http://example.com:8000*
-
-Advanced OCR Config:
-> [!WARNING]
-> Advanced Config Chat Nio Supported Version >= **4.3.1** or **3.10.9**
-
-- `OCR_SKIP_MODELS`: Skip OCR Models List (Commonly for Vision Models)
-    - e.g.: *gpt-4-v,gpt-4-vision-preview,gpt-4-turbo*, then the service will skip these models and directly store the image.
-      - Tips: Each model has character inclusion matching, so when you set `gpt-4-v` model, it will skip all models that contain **gpt-4-v** (like azure-**gpt-4-v**ision-preview, **gpt-4-v**ision-preview will be also matched).
-- `OCR_SPEC_MODELS`: Specific OCR Models List (Commonly for Non-Vision Models)
-    - then although the image has marked as `SKIP_MODELS`, the service will still ocr process the image with this model first.
-    - for example, when you set `gpt-4-turbo` to `SKIP_MODELS` (because `gpt-4-turbo` support vision and don't need to use OCR, `gpt-4-turbo-preview` cannot vision and need OCR), commonly the **gpt-4-turbo**-preview will be marked as **gpt-4-turbo** and skipped, then you can set `gpt-4-turbo-preview` to `SPEC_MODELS` to force OCR process.
-
-EXAMPLE OCR Config:
-```env
-OCR_ENABLED=1
-OCR_ENDPOINT=http://example.com:8000
-OCR_SKIP_MODELS=vision,gpt-4-v,gpt-4-all,gpt-4-vision-preview,gpt-4-1106-vision-preview,gpt-4-turbo,gemini-pro-vision,gemini-1.5-pro,claude-3,glm-4v
-OCR_SPEC_MODELS=gpt-4-turbo-preview,claude-3-haiku
-```
+- `OCR_ENDPOINT` Paddle OCR Endpoint
+    - *e.g.: *http://example.com:8000*
 
 ## Development
 - **~/config.py**: Env Config

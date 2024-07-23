@@ -82,6 +82,5 @@ TG_API = TG_ENDPOINT + "/api" + (f"?pass={TG_PASSWORD}" if TG_PASSWORD and len(T
 
 # OCR Config
 OCR_ENDPOINT = to_endpoint("OCR_ENDPOINT", "")  # OCR Endpoint
-OCR_ENABLED = to_bool("OCR_ENABLED", False)  # OCR Enabled
 OCR_SKIP_MODELS = to_list("OCR_SKIP_MODELS", [])  # OCR Skip Models
 OCR_SPEC_MODELS = to_list("OCR_SPEC_MODELS", [])  # OCR Specific Models

@@ -1,5 +1,6 @@
 from fastapi import UploadFile
-from handlers.ocr import ocr_image, could_enable_ocr
+
+from handlers.ocr import create_ocr_task
 from store.store import process_image
 
 COMMON_IMAGE_EXTENSIONS = {
@@ -17,9 +18,15 @@ def is_image(filename: str) -> bool:
     return filename.split(".")[-1] in COMMON_IMAGE_EXTENSIONS
 
 
-async def process(file: UploadFile, model: str) -> str:
+async def process(file: UploadFile, enable_ocr: bool, enable_vision: bool, not_raise: bool = False):
     """Process image."""
-    if could_enable_ocr(model):
-        return ocr_image(file)
+    if enable_ocr:
+        return create_ocr_task(file)
+
+    if not enable_vision:
+        if not not_raise:
+            return ""
+
+        raise ValueError("Trying to upload image with Vision disabled.")
 
     return await process_image(file)

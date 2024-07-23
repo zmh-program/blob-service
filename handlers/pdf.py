@@ -12,7 +12,7 @@ def is_pdf(filename: str) -> bool:
     return filename.endswith(".pdf")
 
 
-async def process(file: UploadFile, model: str) -> str:
+async def process(file: UploadFile, enable_ocr: bool, enable_vision: bool) -> str:
     filename = file.filename.replace(" ", "_").replace(".", "_")
     doc = fitz.open("pdf", file.file.read())  # read the file from memory
     stack = []
@@ -41,7 +41,7 @@ async def process(file: UploadFile, model: str) -> str:
 
             # create a file-like object for the image
             image_file = UploadFile(io, filename=image_name)
-            stack.append(await process_image(image_file, model))
+            stack.append(await process_image(image_file, enable_ocr=enable_ocr, enable_vision=enable_vision, not_raise=True))
 
             print(f"[pdf] extracted image: {image_name} (page: {page.number}, cursor: {cursor}, max: {PDF_MAX_IMAGES})")
 

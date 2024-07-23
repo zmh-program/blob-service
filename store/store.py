@@ -20,3 +20,9 @@ async def process_image(file: UploadFile) -> str:
 
     handler = IMAGE_HANDLERS.get(STORAGE_TYPE, IMAGE_HANDLERS["common"])
     return await handler(file)
+
+
+async def process_all(file: UploadFile) -> str:
+    """Process all files"""
+
+    return await process_image(file)

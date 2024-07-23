@@ -1,6 +1,6 @@
 from fastapi import UploadFile, File
 import requests
-from config import OCR_ENDPOINT, OCR_ENABLED, OCR_SKIP_MODELS, OCR_SPEC_MODELS
+from config import OCR_ENDPOINT, OCR_SKIP_MODELS, OCR_SPEC_MODELS
 import time
 from typing import List
 
@@ -17,7 +17,7 @@ def get_ocr_source(data: any) -> List[str]:
     return []
 
 
-def ocr_image(file: UploadFile = File(...)) -> str:
+def create_ocr_task(file: UploadFile = File(...)) -> str:
     start = time.time()
 
     response = requests.post(
@@ -39,8 +39,8 @@ def ocr_image(file: UploadFile = File(...)) -> str:
     return " ".join(get_ocr_source(result))
 
 
-def could_enable_ocr(model: str = "") -> bool:
-    if not OCR_ENABLED:
+def deprecated_could_enable_ocr(model: str = "") -> bool:
+    if len(OCR_ENDPOINT) == 0:
         # if OCR is disabled
         return False
 
