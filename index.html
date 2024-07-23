@@ -178,6 +178,59 @@
             transform: rotate(360deg);
         }
     }
+
+    .param-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .param {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        color: hsl(var(--text-secondary));
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .param label {
+        cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+        position: relative;
+        margin-right: 0.25rem;
+        cursor: pointer;
+
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 1rem;
+        height: 1rem;
+        border: 1px solid hsl(var(--border));
+        border-radius: 0.25rem;
+        background: hsl(var(--background));
+        transition: .25s;
+    }
+
+    input[type="checkbox"]:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 0.125rem;
+        background: hsl(var(--background));
+        transition: .25s;
+    }
+
+    input[type="checkbox"]:checked:after {
+        background: hsl(var(--primary));
+    }
 </style>
 </head>
 <body>
@@ -194,18 +247,36 @@
             Click to upload a file
         </span>
     </label>
-    <input type="text" id="model" placeholder="Please enter the model name (e.g. gpt-4)" class="model-input" value="gpt-4-turbo">
+    <div class="param-box">
+        <div class="param">
+            <input type="checkbox" id="vision" checked>
+            <label for="vision">Vision</label>
+        </div>
+        <div class="param">
+            <input type="checkbox" id="ocr" checked>
+            <label for="ocr">OCR</label>
+        </div>
+        <div class="param">
+            <input type="checkbox" id="all" checked>
+            <label for="all">Save All</label>
+        </div>
+    </div>
     <div id="output" class="output-text"></div>
 </div>
 <script>
     const input = document.getElementById('file');
     const output = document.getElementById('output');
-    const model = document.getElementById('model');
+
+    const vision = document.getElementById('vision');
+    const ocr = document.getElementById('ocr');
+    const all = document.getElementById('all');
 
     async function post(file) {
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('model', model.value);
+        formData.append('enable_vision', vision.checked);
+        formData.append('enable_ocr', ocr.checked);
+        formData.append('save_all', all.checked);
 
         try {
             const resp = await fetch('/upload', {

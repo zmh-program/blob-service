@@ -189,6 +189,17 @@ Response
 - `OCR_ENDPOINT` Paddle OCR Endpoint
     - *e.g.: *http://example.com:8000*
 
+## Common Errors
+- *Cannot Use `Save All` Options Without Storage Config*:
+    - This error occurs when you enable `save_all` option without storage config. You need to set `STORAGE_TYPE` to `local` or other storage type to use this option.
+- *Trying to upload image with Vision disabled. Enable Vision or OCR to process image*:
+    - This error occurs when you disable `enable_vision` and `enable_ocr` at the same time. You need to enable at least one of them to process image files.
+- *.ppt files are not supported, only .pptx files are supported*:
+    - This error occurs when you upload a old version of Office PowerPoint file. You need to convert it to `.pptx` format to process it.
+- *.doc files are not supported, only .docx files are supported*:
+    - This error occurs when you upload a old version of Office Word file. You need to convert it to `.docx` format to process it.
+- *File Size Limit Exceeded*:
+    - This error occurs when you upload a file that exceeds the `MAX_FILE_SIZE` limit. You need to reduce the file size to upload it.
 ## Development
 - **~/config.py**: Env Config
 - **~/main.py**: Entry Point

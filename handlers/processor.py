@@ -37,6 +37,7 @@ async def process_file(
             raise ValueError(f"File size {file_size:.2f} MiB exceeds the limit of {MAX_FILE_SIZE} MiB.")
 
     filename = file.filename.lower()
+
     if save_all:
         # save all types of files to storage
         return "file", await process_all(file)
