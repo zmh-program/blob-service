@@ -10,6 +10,7 @@ COMMON_IMAGE_EXTENSIONS = {
     "ico", "cur", "ani", "apng", "cur", "ani", "apng",
     "ps", "eps", "ai", "psb", "tif", "tiff", "svgz",
     "dwg", "dxf", "gpx", "kml", "kmz", "3ds", "c4d",
+    "jb2", "jfif", "pjpeg", "pjp", "avif"
 }
 
 
