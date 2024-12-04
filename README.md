@@ -37,8 +37,8 @@ docker run -p 8000:8000 programzmh/chatnio-blob-service
 # docker run -p 8000:8000 -e AZURE_SPEECH_KEY="..." -e AZURE_SPEECH_REGION="..." programzmh/chatnio-blob-service
 
 
-# if you are using `local` storage type, you need to mount volume (/static) to the host
-# docker run -p 8000:8000 -v /path/to/static:/static programzmh/chatnio-blob-service
+# if you are using `local` storage type, you need to mount volume (/app/static) to the host
+# docker run -p 8000:8000 -v /path/to/static:/app/static programzmh/chatnio-blob-service
 ```
 
 > Deploy to [Render.com](https://render.com)
